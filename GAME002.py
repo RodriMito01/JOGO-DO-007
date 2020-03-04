@@ -18,7 +18,7 @@ def leiaint(msg:str):
         except ValueError:
             print('SOMENTE DIGITE 0, 1 OU 2')
         except KeyboardInterrupt:
-            pass
+            print('')
         except Exception as e:
             pass
 
