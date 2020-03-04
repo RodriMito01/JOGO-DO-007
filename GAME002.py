@@ -1,18 +1,32 @@
-print('---Jogo DO 007!---')
 from random import randint
 from time import sleep
+
+
+def leiaint(msg:str):
+    while True:
+        try:
+            n = int(input(msg))
+            if n <= 2 and n >= 0:
+                return n
+            else:
+                pass
+        except ValueError:
+            print('SOMENTE DIGITE 0, 1 OU 2')
+        except Exception as e:
+            pass
 
 
 itens = ('DEFESA', 'ATAQUE', 'CARREGAR')
 bot = 0
 jog = 0
+Bot = 2
+print('---Jogo DO 007!---')
 while True:
-    Bot = randint(0, 2)
     print('''Suas jogadas são:
     [0] DEFESA
     [1] ATAQUE
     [2] CARREGAR''')
-    Player = int(input('Qual sua jogada: '))
+    Player = leiaint('Qual a sua jogada: ')
     print('0')
     sleep(1)
     print('0')
@@ -27,26 +41,44 @@ while True:
         if Player == 0:
             print('AMBOS DEFENDEM')
         elif Player == 1:
+            jog -= 1
             print('JOGO CONTINUA')
         elif Player == 2:
+            jog += 1
             print('BOT SALVO')
         else:
             print('JOGADA INVÁLIDA')
     elif Bot == 1:  # ATAQUE
         if Player == 0:
+            bot -= 1
             print('JOGO CONTINUA')
         elif Player == 1:
+            bot -= 1
+            jog -= 1
             print('JOGO CONTINUA')
         elif Player == 2:
-            print('BOT VENCE')
+            if bot > 0:
+                bot -= 1
+                print('BOT VENCE')
+                break
+            else:
+                print('NÃO SE ATIRA SEM BALA, BOT!')
         else:
             print('JOGADA INVÁLIDA')
     elif Bot == 2:  # CARREGAR
         if Player == 0:
+            bot += 1
             print('JOGO CONTINUA')
         elif Player == 1:
-            print('PLAYER VENCE')
+            if jog > 0:
+                jog -= 1
+                print('PLAYER VENCE')
+                break
+            else:
+                print('NÃO SE ATIRA SEM BALA, JOGADOR!')
         elif Player == 2:
-            print('EMPATE')
+            bot += 1
+            jog += 1
         else:
             print('JOGADA INVÁLIDA')
+    Bot = randint(0, 2)
