@@ -44,18 +44,15 @@ try:
         print('007!!!!')
         sleep(1)
         cls()
-        print('=-=-' * 10)
-        print('O jogador escolheu: {}'.format(itens[Player]))
-        print('Bot escolheu: {}'.format(itens[Bot]))
-        print('=-=-' * 10)
-        print(f'bot: {bot} jog:{jog}')
         sleep(2)
         if Bot == 0:  # DEFESA
             if Player == 0:
                 print('AMBOS DEFENDEM')
             elif Player == 1:
-                jog -= 1
-                print('JOGO CONTINUA')
+                if jog > 0:
+                    jog -= 1
+                else:
+                    print('NÃO SE ATIRA SEM BALA, JOGADOR!')
             elif Player == 2:
                 jog += 1
                 print('BOT SALVO')
@@ -63,12 +60,20 @@ try:
                 print('JOGADA INVÁLIDA')
         elif Bot == 1:  # ATAQUE
             if Player == 0:
-                bot -= 1
-                print('JOGO CONTINUA')
+                if bot > 0:
+                    bot -= 1
+                    print('JOGO CONTINUA')
+                else:
+                    print('NÃO SE ATIRA SEM BALA, JOGADOR!')
             elif Player == 1:
-                bot -= 1
-                jog -= 1
-                print('JOGO CONTINUA')
+                if bot > 0:
+                    bot -= 1
+                else:
+                    print('NÃO SE ATIRA SEM BALA, BOT!')
+                if jog > 0:
+                    jog -= 1
+                else:
+                    print('NÃO SE ATIRA SEM BALA, JOGADOR!')
             elif Player == 2:
                 if bot > 0:
                     bot -= 1
@@ -76,6 +81,7 @@ try:
                     break
                 else:
                     print('NÃO SE ATIRA SEM BALA, BOT!')
+                    jog += 1
             else:
                 print('JOGADA INVÁLIDA')
         elif Bot == 2:  # CARREGAR
@@ -95,5 +101,10 @@ try:
             else:
                 print('JOGADA INVÁLIDA')
         Bot = randint(0, 2)
+        print('=-=-' * 10)
+        print('O jogador escolheu: {}'.format(itens[Player]))
+        print('Bot escolheu: {}'.format(itens[Bot]))
+        print('=-=-' * 10)
+        print(f'bot: {bot} jog:{jog}')
 except KeyboardInterrupt:
     print('O Jogador interrompeu o processo com Ctrl+C!\nVolte Sempre!')
